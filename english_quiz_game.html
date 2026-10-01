@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Đấu Trường Tiếng Anh 10 - Unit 1: Family Life</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- QRCode Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        game: {
+                            purple: '#8b5cf6',
+                            pink: '#ec4899',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                            cyan: '#06b6d4',
+                            dark: '#0b0f19'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-short': 'bounce 0.8s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(139, 92, 246, 0.4)' },
+                            '100%': { boxShadow: '0 0 30px rgba(236, 72, 153, 0.8)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top center, #1e1b4b 0%, #0f172a 60%, #070a12 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+            touch-action: manipulation;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #c026d3 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -5px rgba(124, 58, 237, 0.6);
+        }
+        .gradient-btn:active {
+            transform: translateY(0);
+        }
+        .option-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .option-card:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.01);
+            border-color: #8b5cf6;
+        }
+        .mc-talking-ring {
+            box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+            animation: pulse-ring 1.5s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(168, 85, 247, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.4);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen justify-between text-slate-100 overflow-x-hidden selection:bg-purple-500 selection:text-white">
+
+    <header class="w-full border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-gamepad text-xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-black gradient-text leading-none uppercase tracking-wide">English Quiz Arena</h1>
+                    <p class="text-[11px] text-slate-400 font-medium">Unit 1: Family Life (30 Câu Hỏi)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Music Toggle -->
+                <button id="musicToggleBtn" onclick="toggleBgm()" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700 flex items-center gap-1.5 text-xs font-semibold" title="Bật/Tắt Nhạc Nền">
+                    <i id="musicIcon" class="fa-solid fa-music text-pink-400"></i>
+                    <span class="hidden sm:inline">Nhạc Nền</span>
+                </button>
+
+                <!-- Sound/Speech Toggle -->
+                <button id="soundToggleBtn" onclick="toggleSound()" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700 flex items-center gap-1.5 text-xs font-semibold" title="Bật/Tắt Giọng Đọc MC & Âm Thanh">
+                    <i id="soundIcon" class="fa-solid fa-volume-high text-indigo-400"></i>
+                    <span class="hidden sm:inline">Giọng Nói</span>
+                </button>
+
+                <div id="roleBadge" class="hidden px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    <i class="fa-solid fa-user-gear mr-1"></i> <span id="roleText">Role</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+
+        <!-- VIEW 1: Home / Role Selector Screen -->
+        <section id="viewHome" class="flex flex-col items-center justify-center py-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold mb-6 animate-pulse-slow">
+                <i class="fa-solid fa-wand-magic-sparkles text-pink-400"></i> Game Đấu Trường Tiếng Anh - Tích Hợp MC AI & Live Sync
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 max-w-4xl leading-tight">
+                Ôn Tập Từ Vựng <span class="gradient-text">Tiếng Anh 10</span> Chuẩn SGK
+            </h1>
+            <p class="text-slate-400 max-w-2xl text-sm sm:text-base mb-8 leading-relaxed">
+                Học sinh dùng <strong>Điện thoại quét mã QR</strong> để tham gia làm bài (Chỉ cần nhập Họ & Tên).
+                Giáo viên theo dõi bảng điểm & bảng xếp hạng thi đấu <strong>Real-time</strong> trên máy chiếu!
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl w-full">
+                <!-- Teacher Mode Card -->
+                <div onclick="initTeacherMode()" class="glass-panel p-6 sm:p-8 rounded-3xl text-left border border-slate-700/80 hover:border-indigo-500/80 cursor-pointer transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-indigo-600/10 rounded-full blur-2xl group-hover:bg-indigo-600/20 transition-all"></div>
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chalkboard-user text-2xl text-indigo-400"></i>
+                    </div>
+                    <h2 class="text-xl font-extrabold mb-2 text-white flex items-center justify-between">
+                        Màn Hình Giáo Viên
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all text-sm"></i>
+                    </h2>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                        Hiển thị mã QR phóng to lên máy chiếu, theo dõi bảng xếp hạng real-time, thống kê câu đúng/sai của cả lớp.
+                    </p>
+                    <span class="inline-flex items-center text-xs font-bold text-indigo-400 group-hover:underline">
+                        Mở Bảng Điều Khiển GV <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i>
+                    </span>
+                </div>
+
+                <!-- Student Mode Card -->
+                <div onclick="initStudentMode()" class="glass-panel p-6 sm:p-8 rounded-3xl text-left border border-slate-700/80 hover:border-purple-500/80 cursor-pointer transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl group-hover:bg-purple-600/20 transition-all"></div>
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-mobile-screen-button text-2xl text-purple-400"></i>
+                    </div>
+                    <h2 class="text-xl font-extrabold mb-2 text-white flex items-center justify-between">
+                        Màn Hình Học Sinh
+                        <i class="fa-solid fa-arrow-right text-slate-500 group-hover:text-purple-400 group-hover:translate-x-1 transition-all text-sm"></i>
+                    </h2>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+                        Nhập Họ & Tên để bắt đầu làm 30 câu trắc nghiệm tiếng Anh sôi động có MC AI giọng chuẩn đọc câu hỏi.
+                    </p>
+                    <span class="inline-flex items-center text-xs font-bold text-purple-400 group-hover:underline">
+                        Vào Làm Bài Ngay <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="viewTeacher" class="hidden space-y-6">
+            <div class="glass-panel p-6 rounded-3xl border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> TRỰC TIẾP LỚP HỌC
+                        </span>
+                        <span id="roomCodeDisplay" class="text-xs font-mono font-bold text-slate-300 bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg">Mã phòng: ENG101</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">Bảng Theo Dõi Kết Quả Real-time</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">Chiếu màn hình mã QR lên máy chiếu để học sinh dùng điện thoại quét làm bài</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="openQrModal()" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-purple-600/30 transition-all">
+                        <i class="fa-solid fa-expand"></i> Phóng To Mã QR Máy Chiếu
+                    </button>
+                    <button onclick="copyStudentLink()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-2">
+                        <i class="fa-regular fa-copy"></i> Sao Chép Link
+                    </button>
+                    <button onclick="confirmResetData()" class="px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold border border-red-500/30 flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Đặt Lại Trận Đấu
+                    </button>
+                </div>
+            </div>
+
+            <!-- Warning for Local File running -->
+            <div id="localFileWarning" class="hidden glass-panel p-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 text-amber-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 shrink-0 text-base">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-amber-300">Lưu ý khi mở game trực tiếp từ máy tính (File ổ C:)</p>
+                        <p class="text-slate-300 text-[11px] mt-0.5">Điện thoại học sinh không thể kết nối tới ổ đĩa C máy tính cá nhân. Hãy dán URL Web đã đăng hoặc IP Wi-Fi bên dưới để tự động đổi Mã QR.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid: QR Code + Live Podium Leaderboard -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- QR Box -->
+                <div class="glass-panel p-6 rounded-3xl flex flex-col items-center justify-center text-center border border-slate-700/80 relative">
+                    <h3 class="text-lg font-extrabold text-white mb-1">Quét Mã QR Làm Bài</h3>
+                    <p class="text-xs text-slate-400 mb-4">Mở Camera điện thoại kết nối Wifi/4G để quét</p>
+
+                    <div class="p-4 bg-white rounded-2xl shadow-2xl mb-3 transition-transform hover:scale-105 cursor-pointer" onclick="openQrModal()">
+                        <div id="qrcode" class="flex justify-center items-center"></div>
+                    </div>
+
+                    <p class="text-[11px] text-purple-400 font-semibold mb-3">Chạm vào QR để phóng to toàn màn hình</p>
+
+                    <div class="w-full space-y-2">
+                        <div class="flex items-center justify-between text-[11px] font-bold text-slate-400">
+                            <span>Đường dẫn Web cho học sinh:</span>
+                            <button onclick="toggleCustomUrlInput()" class="text-indigo-400 hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square"></i> Đổi URL / IP
+                            </button>
+                        </div>
+
+                        <div id="customUrlContainer" class="hidden space-y-1.5">
+                            <input type="text" id="customUrlInput" placeholder="Nhập link Web trực tuyến (vd: https://myquiz.vercel.app)" class="w-full bg-slate-900 border border-indigo-500/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 outline-none focus:ring-1 focus:ring-indigo-400">
+                            <button onclick="applyCustomUrl()" class="w-full py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-bold transition-colors">
+                                Cập Nhật Mã QR
+                            </button>
+                        </div>
+
+                        <div class="w-full bg-slate-900/90 p-3 rounded-xl border border-slate-800 text-[11px] font-mono text-slate-300 break-all select-all text-left" id="roomUrlBox">
+                            Đang tạo link...
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 w-full flex items-center justify-between text-xs text-slate-400">
+                        <span><i class="fa-solid fa-users text-indigo-400 mr-1.5"></i> Đã tham gia:</span>
+                        <span id="teacherStudentCount" class="font-extrabold text-emerald-400 text-base">0 học sinh</span>
+                    </div>
+                </div>
+
+                <!-- Podium & Leaderboard Table -->
+                <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-700/80 flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <h3 class="text-lg font-black text-white flex items-center gap-2">
+                                <i class="fa-solid fa-trophy text-amber-400"></i> Bảng Vàng Thành Tích Cả Lớp
+                            </h3>
+                            <span class="text-xs text-slate-400 flex items-center gap-1">
+                                <i class="fa-solid fa-arrows-rotate text-indigo-400 animate-spin"></i> Cập nhật trực tuyến từ Firestore
+                            </span>
+                        </div>
+
+                        <!-- Top 3 Podium Cards -->
+                        <div id="podiumContainer" class="grid grid-cols-3 gap-3 mb-6 hidden">
+                            <!-- Top 2 -->
+                            <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-2xl text-center flex flex-col items-center justify-end relative pt-6">
+                                <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-900 font-black text-xs flex items-center justify-center absolute -top-3 shadow-md">2</div>
+                                <i class="fa-solid fa-medal text-slate-300 text-2xl mb-1"></i>
+                                <p id="podium2Name" class="font-bold text-xs text-white truncate w-full">---</p>
+                                <p id="podium2Score" class="text-xs font-black text-amber-400">0/30</p>
+                            </div>
+                            <!-- Top 1 Gold -->
+                            <div class="bg-gradient-to-b from-amber-500/20 to-slate-900 border border-amber-500/50 p-4 rounded-2xl text-center flex flex-col items-center justify-end relative pt-8 -translate-y-2 shadow-xl shadow-amber-500/10">
+                                <div class="w-9 h-9 rounded-full bg-amber-400 text-slate-900 font-black text-sm flex items-center justify-center absolute -top-4 shadow-lg shadow-amber-400/50 animate-bounce">1</div>
+                                <i class="fa-solid fa-crown text-amber-400 text-3xl mb-1"></i>
+                                <p id="podium1Name" class="font-black text-sm text-white truncate w-full">---</p>
+                                <p id="podium1Score" class="text-sm font-black text-amber-400">0/30</p>
+                            </div>
+                            <!-- Top 3 -->
+                            <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-2xl text-center flex flex-col items-center justify-end relative pt-6">
+                                <div class="w-8 h-8 rounded-full bg-amber-700 text-white font-black text-xs flex items-center justify-center absolute -top-3 shadow-md">3</div>
+                                <i class="fa-solid fa-award text-amber-600 text-2xl mb-1"></i>
+                                <p id="podium3Name" class="font-bold text-xs text-white truncate w-full">---</p>
+                                <p id="podium3Score" class="text-xs font-black text-amber-400">0/30</p>
+                            </div>
+                        </div>
+
+                        <!-- Leaderboard Table -->
+                        <div class="overflow-x-auto max-h-[320px] overflow-y-auto pr-1">
+                            <table class="w-full text-left text-xs sm:text-sm">
+                                <thead class="text-xs text-slate-400 uppercase bg-slate-900/80 sticky top-0 backdrop-blur-md">
+                                    <tr>
+                                        <th class="py-3 px-3 rounded-l-xl">Hạng</th>
+                                        <th class="py-3 px-3">Họ & Tên Học Sinh</th>
+                                        <th class="py-3 px-3 text-center">Tiến Độ</th>
+                                        <th class="py-3 px-3 text-center">Số Câu Đúng</th>
+                                        <th class="py-3 px-3 text-right rounded-r-xl">Tỷ Lệ Đúng</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="teacherLeaderboardBody" class="divide-y divide-slate-800/80 font-medium">
+                                    <tr id="emptyLeaderboardRow">
+                                        <td colspan="5" class="text-center py-12 text-slate-500">
+                                            <i class="fa-solid fa-users-slash text-2xl mb-2 block text-indigo-500"></i>
+                                            Chưa có học sinh nộp bài. Mời học sinh quét mã QR trên màn hình!
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Stats Bar -->
+                    <div class="mt-6 pt-4 border-t border-slate-800 grid grid-cols-3 gap-3 text-center">
+                        <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                            <p class="text-[11px] text-slate-400 mb-1">Tổng Bài Nộp</p>
+                            <p id="statTotalSubmissions" class="text-lg sm:text-2xl font-black text-indigo-400">0</p>
+                        </div>
+                        <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                            <p class="text-[11px] text-slate-400 mb-1">Điểm TB Lớp</p>
+                            <p id="statAvgScore" class="text-lg sm:text-2xl font-black text-amber-400">0/30</p>
+                        </div>
+                        <div class="bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+                            <p class="text-[11px] text-slate-400 mb-1">Độ Chính Xác TB</p>
+                            <p id="statAccuracy" class="text-lg sm:text-2xl font-black text-emerald-400">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="viewStudentJoin" class="hidden max-w-md mx-auto w-full">
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-purple-500/30 text-center shadow-2xl relative">
+                <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-purple-600 to-pink-600 mx-auto flex items-center justify-center mb-5 shadow-xl shadow-purple-500/30 animate-float">
+                    <i class="fa-solid fa-user-astronaut text-4xl text-white"></i>
+                </div>
+                <h2 class="text-2xl font-black text-white mb-2">Đấu Trường Tiếng Anh 10</h2>
+                <p class="text-xs text-slate-400 mb-6">Chỉ cần nhập Họ & Tên của bạn để nhận vị trí thi đấu!</p>
+
+                <form onsubmit="event.preventDefault(); startStudentQuiz();" class="space-y-4">
+                    <div class="text-left">
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">Họ và Tên Học Sinh <span class="text-red-400">*</span></label>
+                        <div class="relative">
+                            <i class="fa-solid fa-user-tag absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="studentNameInput" required placeholder="Nhập họ và tên (Ví dụ: Nguyễn Văn An)" class="w-full bg-slate-900/90 border border-slate-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/40 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-slate-500 outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <div class="text-left">
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5">Lớp (Không bắt buộc)</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-users text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-sm"></i>
+                            <input type="text" id="studentClassInput" placeholder="Ví dụ: 10A1" class="w-full bg-slate-900/90 border border-slate-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/40 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-slate-500 outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl gradient-btn text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 mt-3">
+                        <i class="fa-solid fa-play"></i> VÀO ĐẤU TRƯỜNG NGAY
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="viewStudentQuiz" class="hidden max-w-3xl mx-auto w-full space-y-4">
+            <!-- Header Status -->
+            <div class="glass-panel px-4 sm:px-6 py-3 rounded-2xl border border-slate-700/80 flex items-center justify-between text-xs sm:text-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-purple-600/20 text-purple-400 font-bold flex items-center justify-center border border-purple-500/30">
+                        <i class="fa-solid fa-user-ninja text-sm"></i>
+                    </div>
+                    <div>
+                        <p id="quizStudentName" class="font-extrabold text-white leading-tight">Học sinh</p>
+                        <p id="quizStudentClass" class="text-[11px] text-slate-400">Lớp 10</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-[10px] uppercase font-bold text-slate-400">Câu hỏi</p>
+                        <p class="font-black text-indigo-400 text-sm sm:text-base"><span id="currentQNum">1</span> / 30</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] uppercase font-bold text-slate-400">Điểm số</p>
+                        <p id="currentScore" class="font-black text-emerald-400 text-sm sm:text-base">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-800/90 rounded-full h-2.5 overflow-hidden p-0.5 border border-slate-700/80 shadow-inner">
+                <div id="quizProgressBar" class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-300 w-[3.33%]"></div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="glass-panel p-5 sm:p-8 rounded-3xl border border-slate-700/80 space-y-5 relative overflow-hidden">
+                <!-- MC Speech Header -->
+                <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+                    <div class="flex items-center gap-2">
+                        <div id="mcAvatar" class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white shadow-md text-sm">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-purple-300">MC Tiếng Anh</span>
+                            <p class="text-[10px] text-slate-400">Đang đồng hành cùng bạn</p>
+                        </div>
+                    </div>
+
+                    <button onclick="speakCurrentQuestion()" class="px-3.5 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 text-xs font-bold flex items-center gap-2 transition-all">
+                        <i class="fa-solid fa-volume-high text-purple-400 text-sm"></i> Nghe MC Đọc
+                    </button>
+                </div>
+
+                <!-- Dynamic Impressive Visual Artwork -->
+                <div id="questionArtwork" class="w-full h-44 sm:h-52 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden relative p-4 shadow-inner">
+                    <!-- Vector artwork dynamically rendered -->
+                </div>
+
+                <!-- Question Text -->
+                <h3 id="questionText" class="text-base sm:text-xl font-extrabold text-white leading-relaxed">
+                    Đang tải câu hỏi...
+                </h3>
+
+                <!-- Options Grid -->
+                <div id="optionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <!-- Dynamically injected options -->
+                </div>
+
+                <!-- Verbal Feedback Box -->
+                <div id="feedbackBox" class="hidden p-4 rounded-2xl border transition-all duration-300 flex items-center gap-3.5">
+                    <div id="feedbackIcon" class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl font-black shrink-0"></div>
+                    <div>
+                        <p id="feedbackTitle" class="font-extrabold text-sm sm:text-base"></p>
+                        <p id="feedbackDesc" class="text-xs text-slate-300 font-medium"></p>
+                    </div>
+                </div>
+
+                <!-- Next Button -->
+                <div class="flex justify-end pt-2">
+                    <button id="nextBtn" onclick="nextQuestion()" disabled class="px-7 py-3.5 rounded-xl bg-slate-800 text-slate-500 font-bold text-sm flex items-center gap-2 transition-all cursor-not-allowed">
+                        Câu Tiếp Theo <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="viewResult" class="hidden max-w-lg mx-auto w-full text-center">
+            <div class="glass-panel p-8 rounded-3xl border border-emerald-500/30 space-y-6 relative overflow-hidden shadow-2xl">
+                <div class="w-24 h-24 rounded-full bg-emerald-500/20 border-2 border-emerald-500/40 mx-auto flex items-center justify-center text-emerald-400 text-5xl shadow-2xl shadow-emerald-500/30 animate-bounce">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white mb-1">Hoàn Thành Đấu Trường!</h2>
+                    <p class="text-xs text-slate-400">Kết quả của bạn đã tự động cập nhật lên màn hình Giáo Viên</p>
+                </div>
+
+                <!-- Stats Summary -->
+                <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 mb-1">Số Câu Đúng</p>
+                        <p id="finalScore" class="text-3xl sm:text-4xl font-black text-emerald-400">0/30</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 mb-1">Tỷ Lệ Chính Xác</p>
+                        <p id="finalPercentage" class="text-3xl sm:text-4xl font-black text-purple-400">0%</p>
+                    </div>
+                </div>
+
+                <div id="finalEvaluation" class="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-xs sm:text-sm text-indigo-300 font-bold leading-relaxed">
+                    Đánh giá bài làm...
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button onclick="retakeQuiz()" class="flex-1 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 transition-colors">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> Làm Lại
+                    </button>
+                    <button onclick="goHome()" class="flex-1 py-3.5 rounded-xl gradient-btn text-white font-bold text-xs shadow-lg shadow-purple-600/30">
+                        <i class="fa-solid fa-house mr-1"></i> Trang Chủ
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="qrModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-xl z-50 hidden flex flex-col items-center justify-center p-6 text-center">
+        <button onclick="closeQrModal()" class="absolute top-6 right-6 p-3 rounded-2xl bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+
+        <span class="px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold mb-4">
+            <i class="fa-solid fa-qrcode mr-1.5"></i> CHIẾU MÀN HÌNH MÁY CHIẾU LỚP HỌC
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-white mb-2">QUÉT MÃ QR ĐỂ THAM GIA LÀM BÀI</h2>
+        <p class="text-slate-400 text-sm mb-6">Mở Camera điện thoại quét mã dưới đây để vào game nhanh chóng</p>
+
+        <div class="p-6 bg-white rounded-3xl shadow-2xl mb-6 transform scale-110">
+            <div id="modalQrcode"></div>
+        </div>
+
+        <p id="modalRoomUrl" class="text-xs font-mono text-indigo-300 bg-slate-900 px-4 py-2 rounded-xl border border-slate-800 max-w-xl truncate"></p>
+    </div>
+
+    <div id="confirmModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-6 rounded-3xl max-w-sm w-full text-center space-y-4 border border-slate-700">
+            <div class="w-12 h-12 rounded-full bg-red-500/20 text-red-400 mx-auto flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-lg font-black text-white">Xác Nhận Đặt Lại Trận Đấu?</h3>
+            <p class="text-xs text-slate-400">Toàn bộ danh sách điểm số của các học sinh sẽ bị xóa sạch.</p>
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeConfirmModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs">Hủy Bỏ</button>
+                <button onclick="executeResetData()" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs">Xóa & Đặt Lại</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-slate-800/80 bg-slate-950/90 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 font-medium">
+            Game Ôn Tập Trực Tuyến Tiếng Anh 10 &bull; Unit 1: Family Life &bull; Tích hợp MC AI Voice & Firebase Realtime Database
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'english-quiz-game-30';
+        let firebaseConfig = {};
+        try {
+            firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+                apiKey: "demo-key",
+                authDomain: "demo.firebaseapp.com",
+                projectId: "demo-project",
+                storageBucket: "demo.appspot.com",
+                messagingSenderId: "123456789",
+                appId: "1:123456789:web:abcdef"
+            };
+        } catch (e) {
+            console.error("Firebase config error", e);
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        const initialToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        async function initAuth() {
+            try {
+                if (initialToken) {
+                    const userCred = await signInWithCustomToken(auth, initialToken);
+                    currentUser = userCred.user;
+                } else {
+                    const userCred = await signInAnonymously(auth);
+                    currentUser = userCred.user;
+                }
+            } catch (err) {
+                console.warn("Auth fallback anonymously", err);
+                try {
+                    const userCred = await signInAnonymously(auth);
+                    currentUser = userCred.user;
+                } catch(e) {
+                    console.error("Auth failed", e);
+                }
+            }
+        }
+
+        window.appState = {
+            role: null, // 'teacher' | 'student'
+            roomCode: 'ENG101',
+            studentName: '',
+            studentClass: '',
+            currentQIndex: 0,
+            score: 0,
+            soundEnabled: true,
+            bgmEnabled: false,
+            submissions: [],
+            isSpeaking: false,
+            customBaseUrl: ''
+        };
+
+        const questionsData = [
+            { id: 1, question: "Family ___________ are important because they teach children what is right or wrong in life.", options: ["bonds", "values", "holidays", "connections"], answer: 1, topic: "family values" },
+            { id: 2, question: "____ the rubbish in the early morning is a part of my daily routine.", options: ["Putting out", "Coming out", "Pulling out", "Bringing out"], answer: 0, topic: "rubbish" },
+            { id: 3, question: "____ is a person who works at home and takes care of the house and family.", options: ["Breadwinner", "Homemaker", "Servant", "Houseman"], answer: 1, topic: "homemaker" },
+            { id: 4, question: "My mother ____ the responsibility for running the household.", options: ["holds", "takes", "runs", "bears"], answer: 1, topic: "responsibility" },
+            { id: 5, question: "Doing chores as a family will help strengthen ____________.", options: ["family bonds", "generation gap", "family trees", "family values"], answer: 0, topic: "family bonds" },
+            { id: 6, question: "Linh can’t go out with us to see a movie now because she’s ____ dinner.", options: ["preparing", "making", "arranging", "keeping"], answer: 0, topic: "cooking" },
+            { id: 7, question: "He's a man of strong __________. He always fights for what is right and you can rely on him.", options: ["health", "character", "hands", "influence"], answer: 1, topic: "character" },
+            { id: 8, question: "When his wife gave birth to a baby boy, Mr. Nam became the sole ____.", options: ["housemaid", "housekeeper", "father", "breadwinner"], answer: 3, topic: "breadwinner" },
+            { id: 9, question: "Doing housework brings great _________ to children as it helps them develop necessary life skills.", options: ["benefits", "hard work", "results", "practices"], answer: 0, topic: "benefits" },
+            { id: 10, question: "She does two jobs at the same time as she is the main___________ of the family.", options: ["breadwinner", "homemaker", "housewife", "bread maker"], answer: 0, topic: "breadwinner" },
+            { id: 11, question: "Kindness and responsibility are two___________ that many parents want to teach to their children.", options: ["family values", "customs", "cultures", "ideas"], answer: 0, topic: "family values" },
+            { id: 12, question: "Sarah is a(n) ____________ girl. She never cheats in exams.", options: ["generous", "sociable", "frank", "honest"], answer: 3, topic: "honest" },
+            { id: 13, question: "Instead of giving me answers to questions, my parents always ______________ me to think for myself.", options: ["support", "encourage", "respect", "strengthen"], answer: 1, topic: "encourage" },
+            { id: 14, question: "Ms. Mai asked me how she could ____ household chores equally in her family.", options: ["make", "divide", "give", "contribute"], answer: 1, topic: "divide chores" },
+            { id: 15, question: "She's such a good wife. She's __________ her husband through difficult times.", options: ["taught", "left", "supported", "provided"], answer: 2, topic: "supported" },
+            { id: 16, question: "Jim's main____________ in his home is to keep the house clean.", options: ["right", "honour", "part", "responsibility"], answer: 3, topic: "responsibility" },
+            { id: 17, question: "When all members of the family share housework, the family _______________ will become stronger.", options: ["joys", "happiness", "life", "bonds"], answer: 3, topic: "family bonds" },
+            { id: 18, question: "Preparing and cooking meals are some of the essential __________ for teens.", options: ["soft skills", "life skills", "table manners", "netiquette"], answer: 1, topic: "life skills" },
+            { id: 19, question: "When I lived in this city, I used to shop for ____________ at this supermarket.", options: ["heavy lifting", "groceries", "housework", "laundry"], answer: 1, topic: "groceries" },
+            { id: 20, question: "The kids deeply___________ their grandfather for his great knowledge about the world.", options: ["create", "develop", "respect", "discuss"], answer: 2, topic: "respect" },
+            { id: 21, question: "She decided to find a job to __________ money instead of just living at home and being a housekeeper.", options: ["lend", "earn", "borrow", "raise"], answer: 1, topic: "earn money" },
+            { id: 22, question: "I'm lucky to have such a(n)__________ brother who always gives me help when I need it.", options: ["support", "supporting", "supported", "supportive"], answer: 3, topic: "supportive" },
+            { id: 23, question: "In my family, my father always takes charge of doing the ____ lifting.", options: ["strong", "hard", "heavy", "huge"], answer: 2, topic: "heavy lifting" },
+            { id: 24, question: "Do you have to ____ the rubbish out?", options: ["put", "make", "empty", "do"], answer: 0, topic: "rubbish" },
+            { id: 25, question: "My mother told me to do the ____ yesterday but I forgot about it since I had much homework to finish.", options: ["wash-up", "laundry", "childcare", "exercises"], answer: 1, topic: "laundry" },
+            { id: 26, question: "His parents give him full___________ for his choice of school.", options: ["support", "change", "value", "bond"], answer: 0, topic: "support" },
+            { id: 27, question: "My mother and I often go to the supermarket to shop for ____ at weekends.", options: ["cook", "groceries", "heavy lifting", "the chores"], answer: 1, topic: "groceries" },
+            { id: 28, question: "It's not easy for some tenth-graders to get into high school ______________.", options: ["works", "routines", "times", "responsibilities"], answer: 1, topic: "routines" },
+            { id: 29, question: "After eating dinner, I have to do the ____ and then do my homework every day.", options: ["washing-up", "wash-up", "washing-ups", "washings-up"], answer: 0, topic: "washing-up" },
+            { id: 30, question: "My mother is a ___________. She doesn't go to work, but stays at home to look after the family.", options: ["breadwinner", "homemaker", "housemaid", "solider"], answer: 1, topic: "homemaker" }
+        ];
+
+        const AudioFX = {
+            ctx: null,
+            bgmInterval: null,
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            },
+            playCorrect() {
+                if (!window.appState.soundEnabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                    
+                    gain.gain.setValueAtTime(0.25, now + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.3);
+                    
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now + idx * 0.08);
+                    osc.stop(now + idx * 0.08 + 0.35);
+                });
+            },
+            playWrong() {
+                if (!window.appState.soundEnabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(280, now);
+                osc.frequency.exponentialRampToValueAtTime(140, now + 0.35);
+                
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            },
+            startBgm() {
+                this.init();
+                if (this.bgmInterval) clearInterval(this.bgmInterval);
+                let noteIdx = 0;
+                const notes = [261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23];
+                this.bgmInterval = setInterval(() => {
+                    if (!window.appState.bgmEnabled) return;
+                    const now = this.ctx.currentTime;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(notes[noteIdx % notes.length], now);
+                    gain.gain.setValueAtTime(0.04, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                    noteIdx++;
+                }, 400);
+            },
+            stopBgm() {
+                if (this.bgmInterval) {
+                    clearInterval(this.bgmInterval);
+                    this.bgmInterval = null;
+                }
+            }
+        };
+
+        function speakText(text, lang = 'en-US', onEndCallback = null) {
+            if (!window.appState.soundEnabled) {
+                if (onEndCallback) onEndCallback();
+                return;
+            }
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = lang === 'en-US' ? 0.95 : 1.05;
+                utterance.pitch = 1.05;
+
+                const avatar = document.getElementById('mcAvatar');
+                if (avatar) avatar.classList.add('mc-talking-ring');
+
+                utterance.onend = () => {
+                    if (avatar) avatar.classList.remove('mc-talking-ring');
+                    if (onEndCallback) onEndCallback();
+                };
+
+                const voices = window.speechSynthesis.getVoices();
+                if (voices.length > 0) {
+                    const matchedVoice = voices.find(v => v.lang.startsWith(lang));
+                    if (matchedVoice) utterance.voice = matchedVoice;
+                }
+                window.speechSynthesis.speak(utterance);
+            } else {
+                if (onEndCallback) onEndCallback();
+            }
+        }
+
+        window.speakCurrentQuestion = function() {
+            const q = questionsData[window.appState.currentQIndex];
+            const textToRead = `Question ${q.id}. ${q.question}. Option A: ${q.options[0]}. Option B: ${q.options[1]}. Option C: ${q.options[2]}. Option D: ${q.options[3]}`;
+            speakText(textToRead, 'en-US');
+        };
+
+        async function setupTeacherRealtimeSync() {
+            if (!currentUser) await initAuth();
+            if (!currentUser) return;
+
+            const submissionsCol = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+            
+            onSnapshot(submissionsCol, (snapshot) => {
+                const subs = [];
+                snapshot.forEach(docSnap => {
+                    const d = docSnap.data();
+                    if (d.roomCode === window.appState.roomCode) {
+                        subs.push(d);
+                    }
+                });
+
+                subs.sort((a, b) => b.score - a.score || a.timestamp - b.timestamp);
+                window.appState.submissions = subs;
+                renderTeacherLeaderboard(subs);
+            }, (error) => {
+                console.error("Firestore sync error:", error);
+            });
+        }
+
+        async function saveStudentSubmission(submissionData) {
+            if (!currentUser) await initAuth();
+            if (!currentUser) return;
+
+            try {
+                const docId = `${window.appState.roomCode}_${submissionData.studentName.replace(/\s+/g, '_')}`;
+                const subDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', docId);
+
+                await setDoc(subDocRef, {
+                    ...submissionData,
+                    roomCode: window.appState.roomCode,
+                    userId: currentUser.uid,
+                    timestamp: Date.now()
+                });
+            } catch (err) {
+                console.error("Error saving submission:", err);
+            }
+        }
+
+        function getStudentJoinUrl() {
+            if (window.appState.customBaseUrl) {
+                const base = window.appState.customBaseUrl.trim();
+                const separator = base.includes('?') ? '&' : '?';
+                return `${base}${separator}room=${window.appState.roomCode}&mode=student`;
+            }
+            
+            const currentUrl = window.location.href.split('#')[0].split('?')[0];
+            return `${currentUrl}?room=${window.appState.roomCode}&mode=student`;
+        }
+
+        function updateQrCodes() {
+            const studentUrl = getStudentJoinUrl();
+
+            document.getElementById('roomUrlBox').textContent = studentUrl;
+            document.getElementById('modalRoomUrl').textContent = studentUrl;
+
+            const warningBox = document.getElementById('localFileWarning');
+            if (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                if (warningBox && !window.appState.customBaseUrl) {
+                    warningBox.classList.remove('hidden');
+                }
+            } else if (warningBox) {
+                warningBox.classList.add('hidden');
+            }
+
+            const qrcodeContainer = document.getElementById('qrcode');
+            qrcodeContainer.innerHTML = '';
+            new QRCode(qrcodeContainer, {
+                text: studentUrl,
+                width: 170,
+                height: 170,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            const modalQrcodeContainer = document.getElementById('modalQrcode');
+            modalQrcodeContainer.innerHTML = '';
+            new QRCode(modalQrcodeContainer, {
+                text: studentUrl,
+                width: 280,
+                height: 280,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        window.toggleCustomUrlInput = function() {
+            const container = document.getElementById('customUrlContainer');
+            container.classList.toggle('hidden');
+        };
+
+        window.applyCustomUrl = function() {
+            const inputVal = document.getElementById('customUrlInput').value.trim();
+            if (inputVal) {
+                window.appState.customBaseUrl = inputVal;
+                updateQrCodes();
+                showToast("Mã QR đã cập nhật theo URL mới!");
+                document.getElementById('customUrlContainer').classList.add('hidden');
+                document.getElementById('localFileWarning').classList.add('hidden');
+            } else {
+                showToast("Vui lòng nhập đường dẫn URL hợp lệ!");
+            }
+        };
+
+        window.initTeacherMode = function() {
+            window.appState.role = 'teacher';
+            document.getElementById('roleBadge').classList.remove('hidden');
+            document.getElementById('roleText').textContent = 'Giáo Viên';
+            document.getElementById('roomCodeDisplay').textContent = `Mã phòng: ${window.appState.roomCode}`;
+
+            updateQrCodes();
+            showView('viewTeacher');
+            setupTeacherRealtimeSync();
+        };
+
+        window.openQrModal = function() {
+            document.getElementById('qrModal').classList.remove('hidden');
+        };
+
+        window.closeQrModal = function() {
+            document.getElementById('qrModal').classList.add('hidden');
+        };
+
+        window.copyStudentLink = function() {
+            const linkText = document.getElementById('roomUrlBox').textContent;
+            const tempInput = document.createElement('input');
+            tempInput.value = linkText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast("Đã sao chép đường dẫn làm bài cho Học sinh!");
+        };
+
+        window.confirmResetData = function() {
+            document.getElementById('confirmModal').classList.remove('hidden');
+        };
+
+        window.closeConfirmModal = function() {
+            document.getElementById('confirmModal').classList.add('hidden');
+        };
+
+        window.executeResetData = function() {
+            window.appState.submissions = [];
+            renderTeacherLeaderboard([]);
+            closeConfirmModal();
+            showToast("Đã đặt lại dữ liệu trận đấu thành công!");
+        };
+
+        function renderTeacherLeaderboard(submissions) {
+            const tbody = document.getElementById('teacherLeaderboardBody');
+            document.getElementById('teacherStudentCount').textContent = `${submissions.length} học sinh`;
+            document.getElementById('statTotalSubmissions').textContent = submissions.length;
+
+            const podiumContainer = document.getElementById('podiumContainer');
+
+            if (submissions.length === 0) {
+                podiumContainer.classList.add('hidden');
+                tbody.innerHTML = `
+                    <tr id="emptyLeaderboardRow">
+                        <td colspan="5" class="text-center py-12 text-slate-500">
+                            <i class="fa-solid fa-users-slash text-2xl mb-2 block"></i>
+                            Chưa có học sinh nộp bài. Mời học sinh quét mã QR trên màn hình!
+                        </td>
+                    </tr>
+                `;
+                document.getElementById('statAvgScore').textContent = "0/30";
+                document.getElementById('statAccuracy').textContent = "0%";
+                return;
+            }
+
+            podiumContainer.classList.remove('hidden');
+            document.getElementById('podium1Name').textContent = submissions[0]?.studentName || '---';
+            document.getElementById('podium1Score').textContent = submissions[0] ? `${submissions[0].score}/30` : '0/30';
+            
+            document.getElementById('podium2Name').textContent = submissions[1]?.studentName || '---';
+            document.getElementById('podium2Score').textContent = submissions[1] ? `${submissions[1].score}/30` : '0/30';
+
+            document.getElementById('podium3Name').textContent = submissions[2]?.studentName || '---';
+            document.getElementById('podium3Score').textContent = submissions[2] ? `${submissions[2].score}/30` : '0/30';
+
+            let totalScore = 0;
+            tbody.innerHTML = submissions.map((s, idx) => {
+                totalScore += s.score;
+                const pct = Math.round((s.score / 30) * 100);
+                
+                let rankBadge = `<span class="font-bold text-slate-400">#${idx + 1}</span>`;
+                if (idx === 0) rankBadge = `<span class="w-6 h-6 rounded-full bg-amber-400 text-slate-900 font-extrabold text-xs inline-flex items-center justify-center shadow-lg shadow-amber-400/40">1</span>`;
+                if (idx === 1) rankBadge = `<span class="w-6 h-6 rounded-full bg-slate-300 text-slate-900 font-extrabold text-xs inline-flex items-center justify-center">2</span>`;
+                if (idx === 2) rankBadge = `<span class="w-6 h-6 rounded-full bg-amber-700 text-white font-extrabold text-xs inline-flex items-center justify-center">3</span>`;
+
+                return `
+                    <tr class="hover:bg-slate-800/40 transition-colors">
+                        <td class="py-3 px-3">${rankBadge}</td>
+                        <td class="py-3 px-3">
+                            <p class="font-bold text-white">${escapeHtml(s.studentName)}</p>
+                            <p class="text-[11px] text-slate-400">${escapeHtml(s.studentClass || 'Lớp 10')}</p>
+                        </td>
+                        <td class="py-3 px-3 text-center font-mono">${s.progress || '30/30'}</td>
+                        <td class="py-3 px-3 text-center">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+                                ${s.score} / 30
+                            </span>
+                        </td>
+                        <td class="py-3 px-3 text-right font-black text-amber-400 text-sm sm:text-base">
+                            ${pct}%
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            const avg = (totalScore / submissions.length).toFixed(1);
+            const avgPct = Math.round((avg / 30) * 100);
+            document.getElementById('statAvgScore').textContent = `${avg}/30`;
+            document.getElementById('statAccuracy').textContent = `${avgPct}%`;
+        }
+
+        window.initStudentMode = function() {
+            window.appState.role = 'student';
+            document.getElementById('roleBadge').classList.remove('hidden');
+            document.getElementById('roleText').textContent = 'Học Sinh';
+            showView('viewStudentJoin');
+        };
+
+        window.startStudentQuiz = function() {
+            const nameInput = document.getElementById('studentNameInput').value.trim();
+            const classInput = document.getElementById('studentClassInput').value.trim();
+
+            if (!nameInput) {
+                showToast("Vui lòng nhập Họ & Tên!");
+                return;
+            }
+
+            window.appState.studentName = nameInput;
+            window.appState.studentClass = classInput || 'Lớp 10';
+            window.appState.currentQIndex = 0;
+            window.appState.score = 0;
+
+            document.getElementById('quizStudentName').textContent = window.appState.studentName;
+            document.getElementById('quizStudentClass').textContent = window.appState.studentClass;
+
+            showView('viewStudentQuiz');
+            loadQuestion(0);
+        };
+
+        function generateTopicArtwork(topic) {
+            const graphicsMap = {
+                'family values': `
+                    <svg class="w-28 h-28 text-purple-400 filter drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                    </svg>`,
+                'rubbish': `
+                    <svg class="w-28 h-28 text-emerald-400 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                    </svg>`,
+                'homemaker': `
+                    <svg class="w-28 h-28 text-pink-400 filter drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>`,
+                'breadwinner': `
+                    <svg class="w-28 h-28 text-amber-400 filter drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>`,
+                'cooking': `
+                    <svg class="w-28 h-28 text-amber-500 filter drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                    </svg>`,
+                'heavy lifting': `
+                    <svg class="w-28 h-28 text-cyan-400 filter drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>`,
+                'groceries': `
+                    <svg class="w-28 h-28 text-emerald-400 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>`,
+                'default': `
+                    <svg class="w-28 h-28 text-indigo-400 filter drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" />
+                    </svg>`
+            };
+
+            const iconSvg = graphicsMap[topic] || graphicsMap['default'];
+            return `
+                <div class="flex flex-col items-center justify-center text-center animate-float">
+                    ${iconSvg}
+                    <span class="mt-2 text-[11px] uppercase font-black tracking-widest text-indigo-300">Vocabulary Topic: ${topic}</span>
+                </div>
+            `;
+        }
+
+        function loadQuestion(index) {
+            const q = questionsData[index];
+            document.getElementById('currentQNum').textContent = index + 1;
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('currentScore').textContent = window.appState.score;
+
+            const pct = ((index + 1) / 30) * 100;
+            document.getElementById('quizProgressBar').style.width = `${pct}%`;
+
+            document.getElementById('questionArtwork').innerHTML = generateTopicArtwork(q.topic);
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.className = "hidden p-4 rounded-2xl border transition-all duration-300 flex items-center gap-3.5";
+
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.disabled = true;
+            nextBtn.className = "px-7 py-3.5 rounded-xl bg-slate-800 text-slate-500 font-bold text-sm flex items-center gap-2 transition-all cursor-not-allowed";
+
+            const optionsGrid = document.getElementById('optionsGrid');
+            const prefixes = ['A', 'B', 'C', 'D'];
+
+            optionsGrid.innerHTML = q.options.map((opt, oIdx) => `
+                <button onclick="selectOption(${oIdx})" id="optBtn_${oIdx}" class="option-card w-full p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-left flex items-center gap-3.5 text-sm text-slate-200 group">
+                    <span class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center font-black text-xs text-indigo-400 group-hover:bg-purple-600 group-hover:text-white transition-colors shrink-0">
+                        ${prefixes[oIdx]}
+                    </span>
+                    <span class="font-bold flex-grow text-sm sm:text-base">${escapeHtml(opt)}</span>
+                </button>
+            `).join('');
+
+            if (window.appState.soundEnabled) {
+                setTimeout(() => speakCurrentQuestion(), 300);
+            }
+        }
+
+        window.selectOption = function(selectedIdx) {
+            const q = questionsData[window.appState.currentQIndex];
+            const isCorrect = selectedIdx === q.answer;
+
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById(`optBtn_${i}`);
+                if (btn) btn.disabled = true;
+            }
+
+            const selectedBtn = document.getElementById(`optBtn_${selectedIdx}`);
+            const correctBtn = document.getElementById(`optBtn_${q.answer}`);
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackDesc = document.getElementById('feedbackDesc');
+
+            feedbackBox.classList.remove('hidden');
+
+            const correctPhrases = [
+                "Chúc mừng bạn! Đáp án rất xuất sắc!",
+                "Tuyệt vời! Bạn làm rất tốt!",
+                "Chính xác! Giỏi lắm!"
+            ];
+
+            const wrongPhrases = [
+                "Rất tiếc, chưa chính xác rồi! Cố gắng ở câu tiếp theo nhé!",
+                "Rất tiếc! Đừng buồn nhé, hãy tiếp tục!",
+                "Chưa đúng rồi, cố gắng lên nào!"
+            ];
+
+            if (isCorrect) {
+                window.appState.score += 1;
+                document.getElementById('currentScore').textContent = window.appState.score;
+
+                selectedBtn.className = "option-card w-full p-4 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500 text-left flex items-center gap-3.5 text-sm text-emerald-200 font-bold";
+                
+                feedbackBox.className = "p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center gap-3.5 animate-bounce-short";
+                feedbackIcon.className = "w-11 h-11 rounded-2xl bg-emerald-500 text-slate-950 flex items-center justify-center text-xl font-black shrink-0 shadow-lg shadow-emerald-500/30";
+                feedbackIcon.innerHTML = `<i class="fa-solid fa-check"></i>`;
+                feedbackTitle.textContent = "Chính Xác! Tuyệt vời!";
+                feedbackDesc.textContent = `Đáp án đúng là "${q.options[q.answer]}".`;
+
+                AudioFX.playCorrect();
+
+                const randomSpeech = correctPhrases[Math.floor(Math.random() * correctPhrases.length)];
+                speakText(randomSpeech, 'vi-VN');
+
+                if (window.confetti) {
+                    confetti({ particleCount: 40, spread: 70, origin: { y: 0.8 } });
+                }
+            } else {
+                selectedBtn.className = "option-card w-full p-4 rounded-2xl bg-red-500/20 border-2 border-red-500 text-left flex items-center gap-3.5 text-sm text-red-200";
+                if (correctBtn) {
+                    correctBtn.className = "option-card w-full p-4 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500 text-left flex items-center gap-3.5 text-sm text-emerald-200 font-bold";
+                }
+
+                feedbackBox.className = "p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-300 flex items-center gap-3.5";
+                feedbackIcon.className = "w-11 h-11 rounded-2xl bg-red-500 text-white flex items-center justify-center text-xl font-black shrink-0 shadow-lg shadow-red-500/30";
+                feedbackIcon.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+                feedbackTitle.textContent = "Rất Tiếc! Chưa Đúng";
+                feedbackDesc.textContent = `Đáp án đúng là "${q.options[q.answer]}". Hãy cố gắng ở câu sau nhé!`;
+
+                AudioFX.playWrong();
+
+                const randomSpeech = wrongPhrases[Math.floor(Math.random() * wrongPhrases.length)];
+                speakText(randomSpeech, 'vi-VN');
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.disabled = false;
+            nextBtn.className = "px-7 py-3.5 rounded-xl gradient-btn text-white font-black text-sm flex items-center gap-2 shadow-lg shadow-purple-600/30 cursor-pointer";
+        };
+
+        window.nextQuestion = function() {
+            window.appState.currentQIndex += 1;
+            if (window.appState.currentQIndex < 30) {
+                loadQuestion(window.appState.currentQIndex);
+            } else {
+                finishQuiz();
+            }
+        };
+
+        function finishQuiz() {
+            showView('viewResult');
+
+            const score = window.appState.score;
+            const pct = Math.round((score / 30) * 100);
+
+            document.getElementById('finalScore').textContent = `${score}/30`;
+            document.getElementById('finalPercentage').textContent = `${pct}%`;
+
+            const evalBox = document.getElementById('finalEvaluation');
+            let evaluationMsg = "";
+
+            if (score >= 27) {
+                evaluationMsg = "🌟 Xuất Sắc! Bạn làm chủ hoàn toàn từ vựng Unit 1 Family Life!";
+                speakText("Xuất sắc! Bạn đạt điểm số rất cao! Chúc mừng bạn!", "vi-VN");
+                if (window.confetti) confetti({ particleCount: 120, spread: 100, origin: { y: 0.6 } });
+            } else if (score >= 20) {
+                evaluationMsg = "👍 Khá Giỏi! Bạn nắm rất vững kiến thức từ vựng!";
+                speakText("Khá giỏi! Chúc mừng bạn đã hoàn thành đấu trường!", "vi-VN");
+            } else {
+                evaluationMsg = "💪 Cố gắng lên! Hãy đọc lại từ vựng breadwinner, homemaker, family values nhé!";
+                speakText("Hãy cố gắng ôn tập lại từ vựng bạn nhé!", "vi-VN");
+            }
+
+            evalBox.textContent = evaluationMsg;
+
+            saveStudentSubmission({
+                studentName: window.appState.studentName,
+                studentClass: window.appState.studentClass,
+                score: score,
+                total: 30,
+                progress: '30/30'
+            });
+        }
+
+        window.retakeQuiz = function() {
+            window.appState.currentQIndex = 0;
+            window.appState.score = 0;
+            showView('viewStudentQuiz');
+            loadQuestion(0);
+        };
+
+        window.showView = function(viewId) {
+            ['viewHome', 'viewTeacher', 'viewStudentJoin', 'viewStudentQuiz', 'viewResult'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(viewId);
+            if (target) target.classList.remove('hidden');
+        };
+
+        window.goHome = function() {
+            showView('viewHome');
+            document.getElementById('roleBadge').classList.add('hidden');
+            AudioFX.stopBgm();
+        };
+
+        window.toggleSound = function() {
+            window.appState.soundEnabled = !window.appState.soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            if (window.appState.soundEnabled) {
+                icon.className = "fa-solid fa-volume-high text-indigo-400";
+                showToast("Đã bật Giọng Nói & Âm Thanh!");
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-slate-500";
+                window.speechSynthesis.cancel();
+                showToast("Đã tắt Giọng Nói & Âm Thanh!");
+            }
+        };
+
+        window.toggleBgm = function() {
+            window.appState.bgmEnabled = !window.appState.bgmEnabled;
+            const icon = document.getElementById('musicIcon');
+            if (window.appState.bgmEnabled) {
+                icon.className = "fa-solid fa-music text-pink-400 animate-spin-slow";
+                AudioFX.startBgm();
+                showToast("Đã bật Nhạc Nền Game!");
+            } else {
+                icon.className = "fa-solid fa-music text-slate-500";
+                AudioFX.stopBgm();
+                showToast("Đã tắt Nhạc Nền!");
+            }
+        };
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = "fixed bottom-5 right-5 px-5 py-3.5 rounded-2xl bg-indigo-600 text-white font-bold text-xs shadow-2xl z-50 animate-bounce flex items-center gap-2";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            await initAuth();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            const room = urlParams.get('room');
+
+            if (room) window.appState.roomCode = room;
+
+            if (mode === 'student') {
+                initStudentMode();
+            } else if (mode === 'teacher') {
+                initTeacherMode();
+            }
+        });
+    </script>
+</body>
+</html>
